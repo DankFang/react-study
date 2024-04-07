@@ -94,10 +94,12 @@ function MyButton() {
   const [count, setCount] = useState(0);
   // ...
 }
-  // 上述将从 useState 中获得两样东西：当前的 state（count），以及用于更新它的函数（setCount）。你可以给它们起任何名字，但按照惯例会像 [something, setSomething] 这样为它们命名
+  // 上述将从 useState 中获得两样东西：当前的 state（count），以及用于更新它的函数（setCount）。
+  // 你可以给它们起任何名字，但按照惯例会像 [something, setSomething] 这样为它们命名
 ```
 ```
-// 第一次显示按钮时，count 的值为 0，因为你把 0 传给了 useState()。当你想改变 state 时，调用 setCount() 并将新的值传递给它。点击该按钮计数器将递增：
+// 第一次显示按钮时，count 的值为 0，因为你把 0 传给了 useState()。
+// 当你想改变 state 时，调用 setCount() 并将新的值传递给它。点击该按钮计数器将递增：
 
 function MyButton() {
   const [count, setCount] = useState(0);
@@ -145,7 +147,11 @@ function MyButton({ count, onClick }) {
     </button>
   );
 }
-当你点击按钮时，onClick 处理程序会启动。每个按钮的 onClick prop 会被设置为 MyApp 内的 handleClick 函数，所以函数内的代码会被执行。该代码会调用 setCount(count + 1)，使得 state 变量 count 递增。新的 count 值会被作为 prop 传递给每个按钮，因此它们每次展示的都是最新的值。这被称为“状态提升”。通过向上移动 state，我们实现了在组件间共享它。
+当你点击按钮时，onClick 处理程序会启动。
+每个按钮的 onClick prop 会被设置为 MyApp 内的 handleClick 函数，
+所以函数内的代码会被执行。该代码会调用 setCount(count + 1)，使得 state 变量 count 递增。
+新的 count 值会被作为 prop 传递给每个按钮，因此它们每次展示的都是最新的值。
+这被称为“状态提升”。通过向上移动 state，我们实现了在组件间共享它。
 ```
 
 
