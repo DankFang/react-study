@@ -87,4 +87,66 @@ function MyButton() {
 }
 ```
 
+- 更新界面 : 引入 useState：  import { useState } from 'react';
+```
+// 在组件中声明一个 state 变量：
+function MyButton() {
+  const [count, setCount] = useState(0);
+  // ...
+}
+  // 上述将从 useState 中获得两样东西：当前的 state（count），以及用于更新它的函数（setCount）。你可以给它们起任何名字，但按照惯例会像 [something, setSomething] 这样为它们命名
+```
+```
+// 第一次显示按钮时，count 的值为 0，因为你把 0 传给了 useState()。当你想改变 state 时，调用 setCount() 并将新的值传递给它。点击该按钮计数器将递增：
+
+function MyButton() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  return (
+    <button onClick={handleClick}>
+      Clicked {count} times
+    </button>
+  );
+}
+// 第一次 count 变成 1。接着点击会变成 2。继续点击会逐步递增。
+// 注意：多次渲染同一个组件，每个组件都会拥有自己的 state
+```
+
+- Hook：以 use 开头的函数被称为 Hook。useState 是 React 提供的一个内置 Hook，其他hook请详见官方文档，或者自己编写hook函数
+注意：Hook 比普通函数更为严格。你只能在你的组件（或其他 Hook）的 顶层 调用 Hook。如果你想在一个条件或循环中使用 useState，请提取一个新的组件并在组件内部使用它
+PS： 若要在一个大组件里面同时控制小组的state，则需要把小组件里的state移到大组件里面去，例子如下：
+```
+import { useState } from 'react';
+
+export default function MyApp() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  return (
+    <div>
+      <h1>Counters that update together</h1>
+      <MyButton count={count} onClick={handleClick} />
+      <MyButton count={count} onClick={handleClick} />
+    </div>
+  );
+}
+
+function MyButton({ count, onClick }) {
+  return (
+    <button onClick={onClick}>
+      Clicked {count} times
+    </button>
+  );
+}
+当你点击按钮时，onClick 处理程序会启动。每个按钮的 onClick prop 会被设置为 MyApp 内的 handleClick 函数，所以函数内的代码会被执行。该代码会调用 setCount(count + 1)，使得 state 变量 count 递增。新的 count 值会被作为 prop 传递给每个按钮，因此它们每次展示的都是最新的值。这被称为“状态提升”。通过向上移动 state，我们实现了在组件间共享它。
+```
+
+
   
